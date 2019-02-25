@@ -14,14 +14,14 @@ notifications:
 install:
   - npm ci # faster, goes only from package-lock
 before_script:
-  - psql -c 'create database "aqueous-mesa-69921-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+  - psql -c 'create database "deployment-exercise-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
-# before_deploy:
-#   - npm run build-client # make the bundle
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE
+before_deploy:
+  - npm run build-client # make the bundle
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+deploy:
+  skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  app: aqueous-mesa-69921 # see README
+  api_key:
+    secure: 0VSvaimqPxqq+k4iaifYvmdNqgnq8rkAzPi481JkNrEZtpdpwjIdfAVKvfS2Ax5noin1IRn4kevt33idwBZmpvmR8y4B9UaoVn+/Hu/2uWdN6UXmH0DHSpgihp3dRBbPaNcFLBx7oEM7Gq4IOJQr0BgrDEyDE1APdCQd64ILeAZBy1K4a2+xp5bcxgCPyH5nN86XCs0UvbUcvu1W9aa8lZy0Nwy9dTGKbTUAmc1jQO5HK6wtzvDh8beQxcfi7cJ8Cp1bba1Xvn0ZdQWfaf2WhGo0j8bue0wbO4urYTidlKujl06dJ/wlsSVYMY2aM+Khm1oCzUeSw8cQCbNtZ6pCOBJ03YECd4EuMNhXYB38/j7dMZimqV5P5p59UcNs/ES2xVN6km0TeXlbAiffbjNb73iigWLzmWPzBf/gPggxx9poxqJSj7uwAuzMvEoI0YNXXf9+2CZl972mIVyzpu8I0W0wEGjiy38njZiHImZNRW+JM3GveMRuCPslEpPQBGCBw5kqp/XUS4lQTmksuDhNLVZZSXm05D9X139TSlfqy9dZM9mAvlIvfG0/vpdyDQf5mHj1dDSgO1mYVfoZl2wnoNGg70T+fcS8Y6OMXW8luivm5YGKvjkqAWJpQdOmd2jbX00dvK4HYB8vFLxudt0ooi5lDdoF/yxJGXE5e2JYJDg=
